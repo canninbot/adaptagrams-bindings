@@ -11,6 +11,57 @@ Python 3.14.6 with python-igraph 1.0.0, and R 4.5.1 with R igraph 1.6.0. The
 names `pyadaptagrams` and `adaptagrams` had no matching PyPI or CRAN package on
 2026-09-18.
 
+## Quickstart: render a random network
+
+The same randomly generated network is first drawn with ordinary straight
+edges, then with its node positions fixed while libavoid computes orthogonal
+connector paths around every rectangle.
+
+| Before routing | After orthogonal routing |
+|:--:|:--:|
+| ![Random network with straight edges](docs/images/random-network-before.png) | ![Random network with orthogonally routed edges](docs/images/random-network-after.png) |
+
+Python:
+
+```sh
+pip install './python[visualization]'
+python python/examples/render_random_network_png.py --output-dir docs/images
+```
+
+The essential native-igraph workflow in
+[`render_random_network_png.py`](python/examples/render_random_network_png.py)
+is:
+
+```python
+graph = random_network()                       # returns igraph.Graph
+laid_out = ag.layout_graph(graph)
+routed = ag.route_edges(laid_out, routing="orthogonal")
+coordinates = ag.layout_matrix(routed)
+routes = ag.get_edge_routes(routed)
+```
+
+R uses only igraph, adaptagrams, and the built-in PNG graphics device:
+
+```sh
+R CMD INSTALL r
+Rscript r/inst/examples/render_random_network_png.R docs/images
+```
+
+Its corresponding native-igraph flow is:
+
+```r
+graph <- random_network()                      # returns an igraph graph
+laid_out <- layout_graph(graph)
+routed <- route_edges(laid_out, routing = "orthogonal")
+coordinates <- layout_matrix(routed)
+routes <- get_edge_routes(routed)
+```
+
+The R example writes `r-random-network-before.png` and
+`r-random-network-after.png`. Both examples draw `adaptagrams_route`
+explicitly; igraph's standard plotting functions do not automatically render
+custom connector paths.
+
 ## Implemented functionality
 
 - libavoid orthogonal and polyline obstacle-avoiding routing
@@ -178,11 +229,10 @@ because 10,000-node libcola layouts can be impractical on smaller machines.
 
 ## Platform status
 
-Linux x86-64 is locally verified. GitHub Actions configures Linux, macOS, and
-Windows builds; those platforms are CI targets, not locally verified claims.
-The toolchain requires a C++17 compiler and CMake 3.18 or newer. Python wheels
-and an sdist can be created with `python -m build python`; R uses standard
-source package tooling.
+Linux x86-64 is locally verified. Python and R builds are also verified by
+GitHub Actions on Linux, macOS, and Windows. The toolchain requires a C++17
+compiler and CMake 3.18 or newer. Python wheels and an sdist can be created
+with `python -m build python`; R uses standard source package tooling.
 
 ## Licensing
 

@@ -25,6 +25,7 @@ classifiers = [
 
 [project.optional-dependencies]
 dataframe = ["pandas>=2"]
+visualization = ["matplotlib>=3.8"]
 test = ["pytest>=8"]
 
 [tool.scikit-build]
