@@ -21,10 +21,11 @@ Date: 2026-09-18. Host: Linux x86-64 under WSL2. Adaptagrams commit:
   and absolute tolerance `1e-9`.
 - Required Python/R examples and SVG exporter: executed successfully.
 - GitHub Actions run
-  [`35329834228`](https://github.com/canninbot/adaptagrams-bindings/actions/runs/35329834228):
+  [`35331401667`](https://github.com/canninbot/adaptagrams-bindings/actions/runs/35331401667):
   all 16 jobs passed. Python passed on Linux, macOS, and Windows with Python
   3.10 and 3.14 against python-igraph 0.11 and 1.0. R passed `R CMD check` on
-  Linux, macOS, and Windows; the independent cross-language job also passed.
+  Linux, macOS, and Windows. The independent cross-language job passed and
+  generated non-empty PNG output from both language examples.
 
 ## Resolved failures during development
 
