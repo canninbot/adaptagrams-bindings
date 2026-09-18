@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.10", "3.14"]
+        igraph-version: ["~=0.11.0", "~=1.0.0"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv --python ${{ matrix.python-version }} .venv
+      - run: uv pip install --python .venv/bin/python "./python[test]" "igraph${{ matrix.igraph-version }}"
+        if: runner.os != 'Windows'
+      - run: uv pip install --python .venv/Scripts/python.exe "./python[test]" "igraph${{ matrix.igraph-version }}"
+        if: runner.os == 'Windows'
+      - run: .venv/bin/pytest -q python/tests
+        if: runner.os != 'Windows'
+      - run: .venv/Scripts/python.exe -m pytest -q python/tests
+        if: runner.os == 'Windows'
+
+  r:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: r-lib/actions/setup-r@v2
+      - uses: lukka/get-cmake@latest
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          working-directory: r
+          extra-packages: any::rcmdcheck
+      - run: Rscript -e 'rcmdcheck::rcmdcheck("r", args = "--no-manual", error_on = "error")'
+
+  cross-language:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: astral-sh/setup-uv@v6
+      - uses: r-lib/actions/setup-r@v2
+      - uses: lukka/get-cmake@latest
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          working-directory: r
+      - run: uv venv .venv && uv pip install --python .venv/bin/python "./python[test]"
+      - run: R CMD INSTALL r
+      - run: .venv/bin/python tests/cross_language_consistency.py

@@ -1,0 +1,12 @@
+{
+  "vertices": [
+    {"name": "A", "sbgn_class": "macromolecule", "x": 0, "y": 0, "width": 60, "height": 40, "compartment": "cytosol"},
+    {"name": "R", "sbgn_class": "process", "x": 100, "y": 0, "width": 20, "height": 20, "compartment": "cytosol"},
+    {"name": "B", "sbgn_class": "macromolecule", "x": 240, "y": 0, "width": 60, "height": 40, "compartment": "cytosol"},
+    {"name": "C", "sbgn_class": "simple chemical", "x": 170, "y": 0, "width": 50, "height": 50, "compartment": "cytosol"}
+  ],
+  "edges": [
+    {"source": 0, "target": 1, "edge_id": "consumption-1", "sbgn_arc_class": "consumption"},
+    {"source": 1, "target": 2, "edge_id": "production-1", "sbgn_arc_class": "production"}
+  ]
+}

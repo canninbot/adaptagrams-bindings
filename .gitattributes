@@ -1,0 +1,6 @@
+python/vendor/third_party/** -whitespace
+r/vendor/third_party/** -whitespace
+LICENSE -whitespace
+LICENSES/ADAPTAGRAMS-LGPL-2.1-or-later.txt -whitespace
+python/vendor/ADAPTAGRAMS-LICENSE.LGPL -whitespace
+r/vendor/ADAPTAGRAMS-LICENSE.LGPL -whitespace

@@ -1,0 +1,8 @@
+useDynLib(adaptagrams, .registration = TRUE)
+importFrom(Rcpp, evalCpp)
+export(avoid_overlaps)
+export(get_edge_routes)
+export(layout_and_route)
+export(layout_graph)
+export(layout_matrix)
+export(route_edges)

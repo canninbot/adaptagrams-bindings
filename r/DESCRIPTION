@@ -1,0 +1,25 @@
+Package: adaptagrams
+Type: Package
+Title: Adaptagrams Layout and Routing for 'igraph'
+Version: 0.1.0
+Authors@R: person("Adaptagrams", "Bindings", role = c("aut", "cre"),
+    email = "maintainers@example.invalid")
+Description: Native object-avoiding connector routing and constraint-based
+    graph layout using the Adaptagrams C++ libraries. Native 'igraph' graph
+    objects are accepted and returned without changing topology or unrelated
+    attributes.
+License: LGPL (>= 2.1) | file LICENSE
+Encoding: UTF-8
+SystemRequirements: C++17, CMake (>= 3.18)
+Imports:
+    igraph (>= 1.6.0),
+    Rcpp
+LinkingTo:
+    Rcpp
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+NeedsCompilation: yes

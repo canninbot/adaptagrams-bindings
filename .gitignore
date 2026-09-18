@@ -1,0 +1,14 @@
+.venv*/
+.ruff_cache/
+build/
+python/build/
+python/dist/
+python/.pytest_cache/
+**/__pycache__/
+*.egg-info/
+r/src/*.o
+r/src/*.so
+r/src/native-build/
+*.Rcheck/
+*.tar.gz
+*.whl

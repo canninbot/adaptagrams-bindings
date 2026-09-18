@@ -1,0 +1,33 @@
+---
+title: "Routing native igraph graphs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Routing native igraph graphs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup}
+library(igraph)
+library(adaptagrams)
+```
+
+The returned object remains an igraph graph. Coordinates describe rectangle
+centers and the route list contains the connector geometry.
+
+```{r example}
+graph <- make_ring(5)
+result <- layout_and_route(graph)
+coordinates <- layout_matrix(result)
+routes <- get_edge_routes(result)
+```
+
+Use `coordinates` as the `layout` argument for `plot.igraph`. Routed connector
+geometry is custom data and must be rendered separately:
+
+```{r plot, eval=FALSE}
+plot(result, layout = coordinates, edge.color = NA)
+for (route in igraph::edge_attr(result, "adaptagrams_route")) {
+    lines(route[, 1], route[, 2])
+}
+```

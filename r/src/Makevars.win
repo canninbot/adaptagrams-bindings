@@ -1,0 +1,21 @@
+CXX_STD = CXX17
+
+ADAPTAGRAMS_ROOT = ../vendor
+NATIVE_BUILD = $(TEMP)/adaptagrams-native-build
+NATIVE_LIBRARY = $(NATIVE_BUILD)/libadaptagrams_native.a
+
+PKG_CPPFLAGS = -I$(ADAPTAGRAMS_ROOT)/cpp/include
+PKG_LIBS = $(NATIVE_LIBRARY)
+
+$(SHLIB): $(NATIVE_LIBRARY)
+
+$(NATIVE_LIBRARY):
+	cmake -S $(ADAPTAGRAMS_ROOT) -B $(NATIVE_BUILD) -G "MinGW Makefiles" \
+		-DADAPTAGRAMS_BUILD_PYTHON=OFF \
+		-DADAPTAGRAMS_BUILD_CPP_TESTS=OFF \
+		-DCMAKE_BUILD_TYPE=Release
+	cmake --build $(NATIVE_BUILD) --target adaptagrams_native --parallel
+
+clean:
+	rm -rf $(NATIVE_BUILD)
+	rm -f *.o $(SHLIB)

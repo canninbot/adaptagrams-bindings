@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-150 -150 300 300">
+<g fill="none" stroke="#334155" stroke-width="2">
+<polyline points="93.0058,0 93.0058,88.4584 28.7410,88.4584" />
+<polyline points="28.7410,88.4584 28.7410,54.6697 -75.2439,54.6697" />
+<polyline points="-75.2439,54.6697 -75.2439,-54.6697" />
+<polyline points="-75.2439,-54.6697 28.7410,-54.6697 28.7410,-88.4584" />
+<polyline points="93.0058,0 93.0058,-88.4584 28.7410,-88.4584" />
+</g>
+<g fill="white" stroke="#0f172a">
+<rect x="73.0058" y="-15" width="40" height="30" />
+<rect x="8.7410" y="73.4584" width="40" height="30" />
+<rect x="-95.2439" y="39.6697" width="40" height="30" />
+<rect x="-95.2439" y="-69.6697" width="40" height="30" />
+<rect x="8.7410" y="-103.4584" width="40" height="30" />
+</g>
+<g text-anchor="middle" dominant-baseline="middle">
+<text x="93.0058" y="0">A</text>
+<text x="28.7410" y="88.4584">B</text>
+<text x="-75.2439" y="54.6697">C</text>
+<text x="-75.2439" y="-54.6697">D</text>
+<text x="28.7410" y="-88.4584">E</text>
+</g>
+</svg>
