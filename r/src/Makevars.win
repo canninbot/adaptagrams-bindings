@@ -1,7 +1,7 @@
 CXX_STD = CXX17
 
 ADAPTAGRAMS_ROOT = ../vendor
-NATIVE_BUILD = $(TEMP)/adaptagrams-native-build
+NATIVE_BUILD = $(CURDIR)/adaptagrams-native-build
 NATIVE_LIBRARY = $(NATIVE_BUILD)/libadaptagrams_native.a
 
 PKG_CPPFLAGS = -I$(ADAPTAGRAMS_ROOT)/cpp/include

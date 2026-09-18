@@ -25,7 +25,7 @@ add_library(adaptagrams_native STATIC
 target_include_directories(adaptagrams_native PUBLIC
     cpp/include
     "${ADAPTAGRAMS_SOURCE_DIR}")
-target_compile_definitions(adaptagrams_native PRIVATE NDEBUG)
+target_compile_definitions(adaptagrams_native PRIVATE NDEBUG NOMINMAX)
 
 option(ADAPTAGRAMS_BUILD_PYTHON "Build the Python extension" ON)
 if(ADAPTAGRAMS_BUILD_PYTHON)
