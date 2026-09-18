@@ -20,9 +20,11 @@ Date: 2026-09-18. Host: Linux x86-64 under WSL2. Adaptagrams commit:
 - Cross-language fixed obstacle fixture: all four points matched with relative
   and absolute tolerance `1e-9`.
 - Required Python/R examples and SVG exporter: executed successfully.
-
-macOS and Windows were not available locally. They are configured in GitHub
-Actions and are not claimed as verified until those jobs pass.
+- GitHub Actions run
+  [`35329834228`](https://github.com/canninbot/adaptagrams-bindings/actions/runs/35329834228):
+  all 16 jobs passed. Python passed on Linux, macOS, and Windows with Python
+  3.10 and 3.14 against python-igraph 0.11 and 1.0. R passed `R CMD check` on
+  Linux, macOS, and Windows; the independent cross-language job also passed.
 
 ## Resolved failures during development
 
@@ -39,5 +41,10 @@ Actions and are not claimed as verified until those jobs pass.
 - An initial 1,000-node benchmark exceeded 30 seconds and was stopped. No
   incomplete result is reported; reproducible drivers retain configurable
   graph sizes.
+- The first hosted R install selected an unwritable root-level native build
+  directory when `TMPDIR` was empty; builds now use the package staging tree.
+- The first hosted MSVC build encountered Windows `min`/`max` macros and
+  libavoid DLL import annotations while creating a static library; the native
+  target now defines `NOMINMAX` and `LIBAVOID_NO_DLL`.
 
-There are no remaining failing local tests or `R CMD check` warnings.
+There are no remaining failing tests or `R CMD check` warnings.
